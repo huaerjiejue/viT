@@ -5,7 +5,7 @@
 import torch
 import torch.nn as nn
 from einops import reduce
-from torchsummary import summary
+from torchinfo import summary
 
 from patch_embedding import PatchEmbedding
 from transformer_encoder import TransformerEncoder
@@ -53,4 +53,4 @@ class VisionTransformer(nn.Module):
 
 if __name__ == "__main__":
     model = VisionTransformer()
-    print(model)
+    summary(model, input_size=(2, 3, 224, 224))
