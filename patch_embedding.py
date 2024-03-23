@@ -28,6 +28,7 @@ class PatchEmbedding(nn.Module):
         )
         self.cls_token = nn.Parameter(torch.randn(1, 1, embed_dim))
         self.num_patches = (img_size // patch_size) ** 2
+        # 这里将position设置为模型的参数是希望模型可以自己进行学习，赋予不同模块不同的参数，但是这样会增加模型的训练负担，可以直接通过公式得到相应的position加进去
         self.positional_embedding = nn.Parameter(
             torch.randn(self.num_patches + 1, embed_dim)
         )
