@@ -16,11 +16,13 @@ class Classification(nn.Module):
         super(Classification, self).__init__()
         self.layer = nn.Linear(emb_size, num_classes)
         self.norm = nn.LayerNorm(num_classes)
+        self.softmax = nn.Softmax(dim=-1)
 
     def forward(self, x):
         x = reduce(x, "b n e -> b e", "mean")
         out = self.layer(x)
         out = self.norm(out)
+        out = self.softmax(out)
         return out
 
 
